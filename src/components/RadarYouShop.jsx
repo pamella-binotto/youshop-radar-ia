@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./RadarYouShop.css";
 
 const FALLBACK_PRODUCTS = [
@@ -10,21 +10,22 @@ const FALLBACK_PRODUCTS = [
 export default function RadarYouShop({ products, loading }) {
   const [simulatedSpikes, setSimulatedSpikes] = useState({});
   const [selectedAlert, setSelectedAlert] = useState(null);
+  const aiBoxRef = useRef(null);
 
- 
   const activeProducts = products && products.length > 0 ? products : FALLBACK_PRODUCTS;
   const isUsingFallback = !products || products.length === 0;
 
   function handleSimulateSpike(product) {
     const newClicksPerHour = Math.floor(Math.random() * (1800 - 950 + 1)) + 950;
-    const projected24hSales = Math.round(newClicksPerHour * 0.035 * 12); 
+    const projected24hSales = Math.round(newClicksPerHour * 0.035 * 12);
+    const creatorName = "@creator_youshop";
 
     setSimulatedSpikes((prev) => ({
       ...prev,
       [product.id]: {
         clicksPerHour: newClicksPerHour,
         projectedSales: projected24hSales,
-        creatorName: "@camila.beauty" ,
+        creatorName,
       },
     }));
 
@@ -32,7 +33,12 @@ export default function RadarYouShop({ products, loading }) {
       product,
       clicksPerHour: newClicksPerHour,
       projectedSales: projected24hSales,
+      creatorName,
     });
+
+    setTimeout(() => {
+      aiBoxRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }, 100);
   }
 
   function handleReset(id) {
@@ -61,14 +67,13 @@ export default function RadarYouShop({ products, loading }) {
         <div className="sync-status">
           <span className={`status-dot ${loading ? "syncing" : "online"}`}></span>
           {loading
-            ? "Acordando servidor Render (API Java)..."
+            ? "Sincronizando base de estoque..."
             : isUsingFallback
-            ? "Modo Demonstração (Aguardando dados da API)"
-            : `Conectado à API Spring Boot (${products.length} itens)`}
+            ? "Base de Demonstração Ativa"
+            : `Estoque Sincronizado (${products.length} SKUs)`}
         </div>
       </div>
 
-  
       <div className="kpi-grid">
         <div className="kpi-card">
           <span className="kpi-label">Produtos Monitorados</span>
@@ -88,7 +93,6 @@ export default function RadarYouShop({ products, loading }) {
         </div>
       </div>
 
-    
       <div className="radar-table-wrapper">
         <table className="radar-table">
           <thead>
@@ -119,11 +123,14 @@ export default function RadarYouShop({ products, loading }) {
                       </div>
                     )}
                   </td>
-                  <td>{stock} un.</td>
-                  <td>{clicks} cliques/h</td>
-                  <td>~{projected} un.</td>
+                  <td style={{ whiteSpace: "nowrap" }}>{stock} un.</td>
+                  <td style={{ whiteSpace: "nowrap" }}>{clicks} cliques/h</td>
+                  <td style={{ whiteSpace: "nowrap" }}>~{projected} un.</td>
                   <td>
-                    <span className={`pill ${isCritical ? "pill-danger" : "pill-ok"}`}>
+                    <span
+                      className={`pill ${isCritical ? "pill-danger" : "pill-ok"}`}
+                      style={{ whiteSpace: "nowrap" }}
+                    >
                       {isCritical ? "⚠ Risco de Ruptura" : "✓ Estoque Saudável"}
                     </span>
                   </td>
@@ -131,6 +138,7 @@ export default function RadarYouShop({ products, loading }) {
                     {!spike ? (
                       <button
                         className="btn-simulate"
+                        style={{ whiteSpace: "nowrap" }}
                         onClick={() => handleSimulateSpike(product)}
                       >
                         ⚡ Simular Pico
@@ -139,18 +147,22 @@ export default function RadarYouShop({ products, loading }) {
                       <div className="action-group">
                         <button
                           className="btn-view-ai"
-                          onClick={() =>
+                          style={{ whiteSpace: "nowrap" }}
+                          onClick={() => {
                             setSelectedAlert({
                               product,
                               clicksPerHour: spike.clicksPerHour,
                               projectedSales: spike.projectedSales,
-                            })
-                          }
+                              creatorName: spike.creatorName,
+                            });
+                            aiBoxRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                          }}
                         >
                           Ver Ação IA
                         </button>
                         <button
                           className="btn-reset"
+                          style={{ whiteSpace: "nowrap" }}
                           onClick={() => handleReset(product.id)}
                         >
                           Resetar
@@ -165,9 +177,8 @@ export default function RadarYouShop({ products, loading }) {
         </table>
       </div>
 
-     
       {selectedAlert && (
-        <div className="ai-copilot-box">
+        <div className="ai-copilot-box" ref={aiBoxRef}>
           <div className="ai-copilot-header">
             <h3>🤖 Diagnóstico & Ações Recomendadas pela IA</h3>
             <button className="close-btn" onClick={() => setSelectedAlert(null)}>
@@ -176,7 +187,8 @@ export default function RadarYouShop({ products, loading }) {
           </div>
 
           <p className="ai-summary">
-            O produto <strong>{selectedAlert.product.name}</strong> atingiu{" "}
+            O link de <strong>{selectedAlert.creatorName}</strong> levou o produto{" "}
+            <strong>{selectedAlert.product.name}</strong> a{" "}
             <strong>{selectedAlert.clicksPerHour} cliques/hora</strong>. A projeção de{" "}
             <strong>{selectedAlert.projectedSales} vendas</strong> nas próximas 24h supera o
             saldo atual de{" "}
