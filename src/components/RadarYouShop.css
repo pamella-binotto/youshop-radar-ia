@@ -1,0 +1,277 @@
+.radar-container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(19, 41, 75, 0.08);
+  text-align: left;
+  margin-top: 16px;
+}
+
+.radar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 2px solid #f0f4f8;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.radar-badge {
+  background: #9ce600;
+  color: #13294b;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.radar-header h2 {
+  color: #13294b;
+  margin: 8px 0 4px 0;
+  font-size: 22px;
+}
+
+.radar-header p {
+  color: #526075;
+  margin: 0;
+  font-size: 14px;
+}
+
+.sync-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #13294b;
+  background: #f4f7fa;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.status-dot.online {
+  background: #22c55e;
+}
+
+.status-dot.syncing {
+  background: #f59e0b;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.kpi-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.kpi-label {
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.kpi-value {
+  font-size: 22px;
+  color: #13294b;
+}
+
+.kpi-value.highlight {
+  color: #65a30d;
+}
+
+.radar-table-wrapper {
+  overflow-x: auto;
+}
+
+.radar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.radar-table th {
+  background: #13294b;
+  color: #ffffff;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.radar-table th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.radar-table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.radar-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #1e293b;
+}
+
+.row-critical {
+  background: #fff8f8;
+}
+
+.creator-tag {
+  font-size: 11px;
+  color: #b91c1c;
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.pill {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.pill-ok {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.pill-danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.btn-simulate {
+  background: #9ce600;
+  color: #13294b;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 12px;
+  transition: transform 0.1s;
+}
+
+.btn-simulate:hover {
+  background: #8cd100;
+  transform: scale(1.02);
+}
+
+.action-group {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-view-ai {
+  background: #13294b;
+  color: #ffffff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-reset {
+  background: #e2e8f0;
+  color: #334155;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ai-copilot-box {
+  margin-top: 24px;
+  background: #13294b;
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  border-left: 6px solid #9ce600;
+}
+
+.ai-copilot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-copilot-header h3 {
+  margin: 0;
+  color: #9ce600;
+  font-size: 17px;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.ai-summary {
+  font-size: 14px;
+  color: #e2e8f0;
+  margin: 12px 0 16px 0;
+  line-height: 1.5;
+}
+
+.ai-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.ai-action-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 14px;
+  border-radius: 10px;
+}
+
+.ai-action-card h4 {
+  margin: 0 0 8px 0;
+  color: #9ce600;
+  font-size: 14px;
+}
+
+.ai-action-card p {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  color: #f1f5f9;
+  line-height: 1.4;
+}
+
+.quote-msg {
+  font-style: italic;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.ai-tag {
+  font-size: 11px;
+  background: #9ce600;
+  color: #13294b;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+}
