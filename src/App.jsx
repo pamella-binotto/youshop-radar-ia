@@ -11,7 +11,7 @@ function App() {
   const { products, error, success, loading, handleCreate, handleDelete, handleUpdate } = useProducts();
   const [editingProduct, setEditingProduct] = useState(null);
   const [search, setSearch] = useState("");
-  const [activeTab, setActiveTab] = useState("radar"); // Inicia direto no Radar You.Shop
+  const [activeTab, setActiveTab] = useState("radar"); 
 
   const filteredProducts = products.filter((product) =>
     product.name?.toLowerCase().includes(search.toLowerCase())
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div className="app-container" style={{ maxWidth: "960px", margin: "0 auto", padding: "20px" }}>
-      {/* Barra de Navegação You.Shop */}
+      
       <header
         style={{
           background: "#13294b",
@@ -50,7 +50,7 @@ function App() {
       >
         <div style={{ textAlign: "left" }}>
           <h1 style={{ margin: 0, fontSize: "20px", color: "#9ce600" }}>
-            YOU.SHOP <span style={{ color: "#fff", fontWeight: 400 }}>| Control & AI</span>
+            YOUSHOP <span style={{ color: "#fff", fontWeight: 400 }}>| Control & AI</span>
           </h1>
           <small style={{ color: "#cbd5e1" }}>Protótipo — Desafio de Inovação 2027</small>
         </div>
